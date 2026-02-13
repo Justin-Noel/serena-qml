@@ -63,6 +63,7 @@ class Language(str, Enum):
     FORTRAN = "fortran"
     HASKELL = "haskell"
     GROOVY = "groovy"
+    QML = "qml"
     VUE = "vue"
     POWERSHELL = "powershell"
     PASCAL = "pascal"
@@ -231,6 +232,8 @@ class Language(str, Enum):
                 )
             case self.HASKELL:
                 return FilenameMatcher("*.hs", "*.lhs")
+            case self.QML:
+                return FilenameMatcher("*.qml")
             case self.VUE:
                 path_patterns = ["*.vue"]
                 for prefix in ["c", "m", ""]:
@@ -287,6 +290,10 @@ class Language(str, Enum):
                 from solidlsp.language_servers.vts_language_server import VtsLanguageServer
 
                 return VtsLanguageServer
+            case self.QML:
+                from solidlsp.language_servers.qml_language_server import QmlLanguageServer
+
+                return QmlLanguageServer
             case self.VUE:
                 from solidlsp.language_servers.vue_language_server import VueLanguageServer
 
